@@ -2,7 +2,7 @@ nfd:
   enabled: false
 
 labeller:
-  enabled: false
+  enabled: true
 
 dp:
   image:
@@ -28,8 +28,13 @@ securityContext:
 tolerations:
   - key: CriticalAddonsOnly
     operator: Exists
+  - key: platform.neuromation.io/job
+    operator: Exists
+    effect: NoSchedule
+  - key: "amd.com/gpu"
+    operator: Exists
+    effect: NoSchedule
 
-node_selector_enabled: false
+node_selector_enabled: true
 node_selector:
-  feature.node.kubernetes.io/pci-0300_1002.present: "true"
-  kubernetes.io/arch: amd64
+  feature.node.kubernetes.io/amd-gpu: "true"
